@@ -176,8 +176,8 @@ export default function AboutPage() {
           <div className="order-2 lg:order-1 lg:col-span-6">
             <div className="frame-media aspect-[4/3]">
               <Image
-                src="/images/activities/classroom-early-learning.png"
-                alt="Young pupils learning together in a bright classroom"
+                src="/images/activities/classroom-learning-rect.jpg"
+                alt="Young pupils learning together in a bright classroom at Sunrise Convent School"
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 loading="lazy"

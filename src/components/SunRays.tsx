@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 /**
  * Decorative sunrise motif: a soft golden arc with radiating rays.
  * Purely presentational — hidden from assistive technology.
@@ -105,31 +103,5 @@ export function SunBadge({ className = "" }: { className?: string }) {
         />
       ))}
     </svg>
-  );
-}
-
-/** Wraps a section with an optional soft background wash. */
-export function Section({
-  children,
-  className = "",
-  id,
-  tone = "white",
-}: {
-  children: ReactNode;
-  className?: string;
-  id?: string;
-  tone?: "white" | "cream" | "navy" | "mist";
-}) {
-  const tones: Record<string, string> = {
-    white: "bg-white",
-    cream: "bg-cream",
-    mist: "bg-navy-50/60",
-    navy: "bg-navy-800 text-white",
-  };
-
-  return (
-    <section id={id} className={`${tones[tone]} ${className}`}>
-      {children}
-    </section>
   );
 }

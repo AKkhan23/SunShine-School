@@ -97,7 +97,7 @@ export default function AcademicsPage() {
         title="Learning Built Step by Step, From Nursery to Class 8"
         lede="Our academic philosophy is straightforward: get the foundations right, explain things more than once, and give every child a chance to take part. The pages below describe general educational goals — the exact syllabus, timetable and assessment pattern are shared by the school office."
         trail={trail}
-        media="/images/activities/writing-activity.png"
+        media="/images/activities/writing-activity-rect.jpg"
         mediaAlt="A pupil concentrating as she writes in her notebook during a class activity"
       />
 
@@ -253,8 +253,8 @@ export default function AcademicsPage() {
               />
               <div className="frame-media mt-9 aspect-[4/3]">
                 <Image
-                  src="/images/activities/classroom-early-learning.png"
-                  alt="Young pupils learning together in a bright classroom at Sunrise Convent School"
+                  src="/images/activities/music-creative-activity.jpg"
+                  alt="Students taking part in a music and creative activity session"
                   fill
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   loading="lazy"

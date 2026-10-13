@@ -12,7 +12,8 @@ export type GalleryCategory =
   | "Learning in the classroom"
   | "Sports & games"
   | "Cultural celebrations"
-  | "Educational tours";
+  | "Educational tours"
+  | "Student achievements";
 
 export type GalleryItem = {
   src: string;
@@ -65,7 +66,7 @@ export const galleryItems: GalleryItem[] = [
     src: "/images/achievements/sunrise-convent-school-shining-stars-poster.jpeg",
     alt: "Our Shining Stars poster showing Class 8 and Class 5 board examination results for Sunrise Convent School",
     caption: "Our Shining Stars — Class 8 and Class 5 board results",
-    category: "Campus",
+    category: "Student achievements",
     aspect: "3 / 4",
     span: "tall",
   },
@@ -173,6 +174,7 @@ export const galleryCategories: GalleryCategory[] = [
   "Sports & games",
   "Cultural celebrations",
   "Educational tours",
+  "Student achievements",
 ];
 
 /**

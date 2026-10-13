@@ -23,7 +23,7 @@ export function Header() {
 
   /* Condense the header on scroll. */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 32);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -73,7 +73,7 @@ export function Header() {
 
   return (
     <>
-      {/* Utility strip — contact shortcuts, visible on every page. */}
+      {/* Contact strip — desktop only, scrolls away with the page. */}
       <div className="hidden bg-navy-900 text-white md:block">
         <div className="container-page flex h-9 items-center justify-between text-2xs">
           <p className="flex items-center gap-2 text-white/75">
@@ -102,12 +102,13 @@ export function Header() {
       </div>
 
       <header
-        className={`sticky top-0 z-50 border-b transition-all duration-300 ease-gentle ${
+        className={`sticky top-0 z-50 border-b bg-white/95 backdrop-blur-md transition-shadow duration-300 ease-gentle ${
           scrolled
-            ? "border-navy-100 bg-white/95 shadow-[0_8px_30px_-20px_rgba(7,54,83,0.5)] backdrop-blur-md"
-            : "border-transparent bg-white"
+            ? "border-navy-100 shadow-[0_8px_30px_-20px_rgba(7,54,83,0.5)]"
+            : "border-transparent"
         }`}
       >
+        {/* Row 1 — brand and primary action */}
         <div
           className={`container-page flex items-center justify-between gap-4 transition-all duration-300 ease-gentle ${
             scrolled ? "h-16" : "h-[4.75rem]"
@@ -115,8 +116,40 @@ export function Header() {
         >
           <BrandLink />
 
-          <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-0.5">
+          <div className="flex items-center gap-2.5">
+            <Link href="/admissions" className="btn-primary btn-sm hidden sm:inline-flex">
+              Enquire for Admission
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+
+            <button
+              ref={toggleRef}
+              type="button"
+              onClick={() => setOpen((value) => !value)}
+              aria-expanded={open}
+              aria-controls="mobile-navigation"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-navy-200 bg-white text-navy-800 shadow-card transition-colors hover:border-navy-300 lg:hidden"
+            >
+              <span className="sr-only">
+                {open ? "Close navigation menu" : "Open navigation menu"}
+              </span>
+              {open ? (
+                <X className="h-5 w-5" aria-hidden="true" />
+              ) : (
+                <Menu className="h-5 w-5" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Row 2 — full navigation, desktop only. Collapses away on scroll. */}
+        <div
+          className={`hidden overflow-hidden border-t border-navy-100/70 transition-all duration-300 ease-gentle lg:block ${
+            scrolled ? "max-h-0 opacity-0" : "max-h-16 opacity-100"
+          }`}
+        >
+          <nav aria-label="Primary" className="container-page">
+            <ul className="flex h-12 items-center justify-center gap-1">
               {primaryNav.map((item) => {
                 const active = isActive(item.href);
                 return (
@@ -124,16 +157,14 @@ export function Header() {
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`relative block rounded-full px-3 py-2 text-[0.83rem] font-semibold transition-colors duration-200 ${
-                        active
-                          ? "text-navy-900"
-                          : "text-ink/70 hover:text-navy-800"
+                      className={`relative flex h-full items-center rounded-full px-3 text-[0.82rem] font-semibold transition-colors duration-200 ${
+                        active ? "text-navy-900" : "text-ink/65 hover:text-navy-800"
                       }`}
                     >
                       {item.label}
                       <span
                         aria-hidden="true"
-                        className={`absolute inset-x-3 -bottom-0.5 h-[2.5px] rounded-full bg-sun transition-transform duration-300 ease-gentle ${
+                        className={`absolute inset-x-3 bottom-1 h-[2.5px] rounded-full bg-sun transition-transform duration-300 ease-gentle ${
                           active ? "scale-x-100" : "scale-x-0"
                         }`}
                       />
@@ -143,31 +174,6 @@ export function Header() {
               })}
             </ul>
           </nav>
-
-          <div className="hidden items-center gap-3 lg:flex">
-            <Link href="/admissions" className="btn-primary btn-sm">
-              Enquire for Admission
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </div>
-
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={() => setOpen((value) => !value)}
-            aria-expanded={open}
-            aria-controls="mobile-navigation"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-navy-200 bg-white text-navy-800 shadow-card transition-colors hover:border-navy-300 lg:hidden"
-          >
-            <span className="sr-only">
-              {open ? "Close navigation menu" : "Open navigation menu"}
-            </span>
-            {open ? (
-              <X className="h-5 w-5" aria-hidden="true" />
-            ) : (
-              <Menu className="h-5 w-5" aria-hidden="true" />
-            )}
-          </button>
         </div>
       </header>
 
@@ -176,6 +182,9 @@ export function Header() {
         id="mobile-navigation"
         ref={panelRef}
         hidden={!open}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
         className="fixed inset-x-0 bottom-0 top-[4.75rem] z-40 overflow-y-auto overscroll-contain bg-navy-900/40 backdrop-blur-sm lg:hidden"
         onClick={(event) => {
           if (event.target === event.currentTarget) setOpen(false);
@@ -192,9 +201,7 @@ export function Header() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={`flex items-center justify-between rounded-2xl px-4 py-3.5 text-[0.95rem] font-semibold transition-colors ${
-                        active
-                          ? "bg-sun/15 text-navy-900"
-                          : "text-ink/80 hover:bg-navy-50"
+                        active ? "bg-sun/15 text-navy-900" : "text-ink/80 hover:bg-navy-50"
                       }`}
                     >
                       {item.label}

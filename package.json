@@ -8,6 +8,8 @@
     "build": "next build",
     "start": "npx serve out",
     "typecheck": "tsc --noEmit",
+    "verify": "node scripts/verify-export.cjs && node scripts/verify-classes.cjs",
+    "preview": "node scripts/serve-export.cjs",
     "prepare:assets": "node scripts/prepare-assets.cjs",
     "prepare:og": "node scripts/prepare-og.cjs"
   },

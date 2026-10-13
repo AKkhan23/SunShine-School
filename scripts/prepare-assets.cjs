@@ -29,6 +29,10 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const crops = [
   { out: "campus-building.jpg", box: [14, 255, 528, 345] },
+  // Rectangular (unmasked) variants of the round photographs, for use where a
+  // circular crop would not sit correctly inside a rectangular frame.
+  { out: "classroom-learning-rect.jpg", box: [898, 314, 130, 130] },
+  { out: "writing-activity-rect.jpg", box: [644, 398, 154, 154] },
   { out: "sports-football.png", box: [1056, 194, 168, 168], shape: "circle" },
   { out: "classroom-early-learning.png", box: [879, 295, 168, 168], shape: "circle" },
   { out: "writing-activity.png", box: [630, 384, 206, 206], shape: "circle" },

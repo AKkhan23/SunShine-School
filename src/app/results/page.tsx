@@ -52,7 +52,7 @@ export default function ResultsPage() {
       />
 
       {/* Provenance notice */}
-      <section className="bg-sun/12">
+      <section className="bg-sun/10">
         <div className="container-page py-6">
           <p className="mx-auto flex max-w-4xl items-start gap-3 rounded-2xl border border-sun/50 bg-white/80 p-5 text-[0.85rem] leading-relaxed text-navy-900/80">
             <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-sun-dark" aria-hidden="true" />

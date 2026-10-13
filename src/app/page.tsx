@@ -123,19 +123,19 @@ export default function HomePage() {
                   <dt className="text-2xs font-semibold uppercase tracking-[0.14em] text-ink/45">
                     Classes
                   </dt>
-                  <dd className="mt-1 font-display text-lg text-navy-900">Nursery – 8</dd>
+                  <dd className="mt-1 font-display text-base text-navy-900">Nursery – 8</dd>
                 </div>
                 <div>
                   <dt className="text-2xs font-semibold uppercase tracking-[0.14em] text-ink/45">
                     Medium
                   </dt>
-                  <dd className="mt-1 font-display text-lg text-navy-900">English</dd>
+                  <dd className="mt-1 font-display text-base text-navy-900">English</dd>
                 </div>
                 <div>
                   <dt className="text-2xs font-semibold uppercase tracking-[0.14em] text-ink/45">
                     Motto
                   </dt>
-                  <dd className="mt-1 font-display text-lg text-navy-900">
+                  <dd className="mt-1 whitespace-nowrap font-display text-base text-navy-900">
                     Be nice, work hard
                   </dd>
                 </div>

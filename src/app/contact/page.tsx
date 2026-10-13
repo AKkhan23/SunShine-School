@@ -186,38 +186,52 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map */}
+      {/* Location */}
       <section className="section-y bg-navy-50/60">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Finding Us"
-            title="Locate the School"
-            lede="This opens a map search for the school address. Please verify the exact gate and landmark with the office when you arrive, as we do not publish a pin that has not been confirmed."
-            align="center"
-          />
-
-          <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-card">
-            <Image
-              src={imagePaths.campus}
-              alt="Architectural illustration of the school building at Kod Road, Bhensola Chopati, Tehsil Badnawar"
-              width={1200}
-              height={700}
-              className="h-auto w-full"
-              sizes="(min-width: 1024px) 56vw, 100vw"
-              loading="lazy"
+        <div className="container-page grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="order-2 lg:order-1 lg:col-span-5">
+            <SectionHeading
+              eyebrow="Finding Us"
+              title="Locate the School"
+              lede="The button below opens a map search for the school address. We do not publish a map pin or coordinates that the school has not confirmed, so please check the exact gate and nearest landmark with the office when you arrive."
             />
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href={directionsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                <Route className="h-4 w-4" aria-hidden="true" />
+                Open directions in Maps
+              </a>
+              <a
+                href={whatsappGeneric()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-ghost"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                Ask the office
+              </a>
+            </div>
           </div>
 
-          <div className="mt-8 flex justify-center">
-            <a
-              href={directionsHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              <Route className="h-4 w-4" aria-hidden="true" />
-              Open directions in Maps
-            </a>
+          <div className="order-1 lg:order-2 lg:col-span-7">
+            <div className="frame-media mx-auto max-w-lg aspect-[1131/1600]">
+              <Image
+                src={imagePaths.letterhead}
+                alt="Official letterhead of Sunrise Convent School showing the address on Kod-Bhensola Road, Village Gardawadiya, Bhensola, Tehsil Badnawar, District Dhar, and contact number 88717 63431"
+                fill
+                sizes="(min-width: 1024px) 45vw, 90vw"
+                loading="lazy"
+              />
+            </div>
+            <p className="mt-3 text-center text-[0.8rem] leading-relaxed text-ink/50">
+              The school&rsquo;s official letterhead, reproduced exactly as printed — including
+              the address wording used by the school office.
+            </p>
           </div>
         </div>
       </section>
