@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { imagePaths, school } from "@/lib/site";
 
 export function BrandLockup({
@@ -72,40 +71,5 @@ export function BrandLink({ variant = "dark" }: { variant?: "dark" | "light" }) 
     >
       <BrandLockup variant={variant} />
     </Link>
-  );
-}
-
-/** Rounded, softly framed media block used across pages. */
-export function MediaFrame({
-  src,
-  alt,
-  caption,
-  priority = false,
-  sizes = "(min-width: 1024px) 50vw, 100vw",
-  className = "",
-  children,
-  aspect = "4 / 3",
-}: {
-  src: string;
-  alt: string;
-  caption?: ReactNode;
-  priority?: boolean;
-  sizes?: string;
-  className?: string;
-  children?: ReactNode;
-  aspect?: string;
-}) {
-  return (
-    <figure className={`frame-media ${className}`}>
-      <div style={{ aspectRatio: aspect }}>
-        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} />
-      </div>
-      {children}
-      {caption && (
-        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-900/85 via-navy-900/45 to-transparent px-4 pb-3 pt-8 text-[0.8rem] leading-snug text-white">
-          {caption}
-        </figcaption>
-      )}
-    </figure>
   );
 }

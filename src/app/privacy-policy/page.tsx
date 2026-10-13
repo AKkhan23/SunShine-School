@@ -52,7 +52,7 @@ const sections = [
     heading: "Cookies, analytics and tracking",
     body: [
       "This website does not set any cookies, does not run analytics scripts, and does not use advertising or cross-site tracking. No third-party tracking code has been added.",
-      "Only two font families are downloaded from the Google Fonts service when a page loads. Like any request to an external server, your browser's IP address is visible to that service for the purpose of delivering the font file. If the school prefers to avoid this entirely, the fonts can be self-hosted instead — see the project README.",
+      "The two font families used on this site are downloaded once while the website is being built and are then served from the website's own address. Your browser therefore never contacts a third-party font service when you open a page, and no request of any kind is made to an external server while you read this site.",
     ],
   },
   {
