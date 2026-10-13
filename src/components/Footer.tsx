@@ -118,7 +118,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-[0.8rem] text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {school.name}. All rights reserved.
+            © {new Date().getFullYear()} {school.name}. All rights reserved.
           </p>
           <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {legalNav.map((item) => (

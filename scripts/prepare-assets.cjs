@@ -49,12 +49,51 @@ const crops = [
   { out: "participation-activity.jpg", box: [668, 1106, 168, 136] },
 ];
 
-function circleMask(size) {
+function circleMask(width, height) {
   return Buffer.from(
-    `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">` +
-      `<circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="#fff"/>` +
+    `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">` +
+      `<circle cx="${width / 2}" cy="${height / 2}" r="${Math.min(width, height) / 2}" fill="#fff"/>` +
       `</svg>`,
   );
+}
+
+/**
+ * The photographs inside the poster are small (130–530 px). Displayed inside a
+ * 400–620 px tile they were being blown up by the browser and looked blocky.
+ *
+ * We therefore enlarge them once, here, with a high-quality Lanczos kernel and
+ * a light unsharp mask, so the browser receives an image that is already the
+ * right size and reads as a soft photograph rather than as broken pixels.
+ * This cannot invent detail that is not in the poster — replacing the poster
+ * with the original photographs is the only real cure (see README §11).
+ */
+const MIN_TILE_WIDTH = 900; // px, comfortably above a 2x gallery tile
+const MIN_CIRCLE_WIDTH = 640; // PNG tiles are laid out smaller
+
+async function enhance(buffer, width, shape) {
+  const floor = shape === "circle" ? MIN_CIRCLE_WIDTH : MIN_TILE_WIDTH;
+  const resized = await sharp(buffer)
+    .resize({
+      // Math.max means images that are already large enough are untouched.
+      width: Math.max(width, floor),
+      kernel: sharp.kernel.lanczos3,
+      fit: "inside",
+    })
+    // A touch of unsharp mask recovers the crispness the upscale softens.
+    .sharpen({ sigma: 0.9, m1: 0.6, m2: 1.8 })
+    .toBuffer();
+
+  if (shape !== "circle") return { buffer: resized, size: null };
+
+  // The circular mask has to match the post-resize dimensions exactly.
+  const { width: w, height: h } = await sharp(resized).metadata();
+  const masked = await sharp(resized)
+    .ensureAlpha()
+    .composite([{ input: circleMask(w, h), blend: "dest-in" }])
+    .png({ compressionLevel: 9, quality: 90 })
+    .toBuffer();
+
+  return { buffer: masked, size: `${w}x${h}` };
 }
 
 (async () => {
@@ -68,19 +107,22 @@ function circleMask(size) {
       continue;
     }
 
+    const source = await sharp(posterPath)
+      .extract({ left, top, width, height })
+      .toBuffer();
+
+    const { buffer, size } = await enhance(source, width, shape);
     const target = path.join(outDir, out);
-    let pipeline = sharp(posterPath).extract({ left, top, width, height });
 
-    if (shape === "circle") {
-      pipeline = pipeline
-        .ensureAlpha()
-        .composite([{ input: circleMask(width), blend: "dest-in" }])
-        .png({ compressionLevel: 9 });
+    if (shape !== "circle") {
+      const { width: w, height: h } = await sharp(buffer).metadata();
+      await sharp(buffer)
+        .jpeg({ quality: 92, mozjpeg: true, chromaSubsampling: "4:4:4" })
+        .toFile(target);
+      console.log(`WROTE ${out} ${w}x${h} (${Math.round(fs.statSync(target).size / 1024)} kB)`);
     } else {
-      pipeline = pipeline.jpeg({ quality: 88, mozjpeg: true });
+      fs.writeFileSync(target, buffer);
+      console.log(`WROTE ${out} ${size} (${Math.round(fs.statSync(target).size / 1024)} kB)`);
     }
-
-    await pipeline.toFile(target);
-    console.log(`WROTE ${out} (${width}x${height}, ${Math.round(fs.statSync(target).size / 1024)} kB)`);
   }
 })();

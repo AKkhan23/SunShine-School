@@ -172,7 +172,8 @@ public/images/
 ├── campus/       sunrise-convent-school-campus-illustration.jpeg
 ├── promotions/   sunrise-convent-school-admission-poster.jpeg
 ├── achievements/ sunrise-convent-school-shining-stars-poster.jpeg
-└── activities/   17 photographs cropped from the school's admission poster
+└── activities/   18 photographs: 17 cropped from the admission poster,
+                  plus plantation-drive.jpg (supplied directly)
 ```
 
 ### Where the activity photographs come from
@@ -181,6 +182,14 @@ The school supplied a single admission poster containing a collage of genuine
 photographs. Rather than invent images, `scripts/prepare-assets.cjs` crops those real
 photographs out of the poster into individual tiles (round ones are masked to a clean
 circle). The original poster is never modified.
+
+Those photographs are small inside the poster (130–530 px), so the script also enlarges
+each crop once, offline, with a **Lanczos3** kernel plus a light **unsharp mask**, and
+saves at quality 92 with 4:4:4 chroma. That is why the gallery and activities photos look
+smooth instead of blocky — the browser no longer has to blow up a tiny file.
+
+This cannot invent detail that was never in the poster. **The only real cure is to supply
+the original photographs** (see §11).
 
 If you replace the poster, delete `public/images/activities/` and re-run:
 
@@ -330,6 +339,15 @@ with a real photo (landscape, at least 1600 px wide) and update the file name in
 - Have the school office read the copy on `/admissions` and `/academics` and correct
   anything that does not match how the school actually works.
 - Have the school office review `/privacy-policy` before publication.
+
+### One more supply-your-originals note
+
+Most gallery and activities photographs are cropped out of the 1252 × 1600 admission
+poster, so each one is only a few hundred pixels across. They have been upscaled and
+sharpened offline so they look clean on screen, but if you send the **original photo
+files** for these activities (sports, annual celebration, dance, tours) the quality will
+jump dramatically. Drop them into `public/images/activities/`, point the matching entry
+in `src/lib/gallery.ts` at the new file, and the site will use them automatically.
 
 ---
 

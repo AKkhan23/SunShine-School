@@ -82,11 +82,16 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-8px)" },
         },
+        "halo-breathe": {
+          "0%, 100%": { transform: "scale(1)", opacity: "0.8" },
+          "50%": { transform: "scale(1.14)", opacity: "1" },
+        },
       },
       animation: {
         "fade-rise": "fade-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both",
         "sun-sweep": "sun-sweep 60s linear infinite",
         "float-soft": "float-soft 7s ease-in-out infinite",
+        "halo-breathe": "halo-breathe 6s ease-in-out infinite",
       },
       transitionTimingFunction: {
         gentle: "cubic-bezier(0.22, 1, 0.36, 1)",

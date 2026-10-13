@@ -13,7 +13,8 @@ export type GalleryCategory =
   | "Sports & games"
   | "Cultural celebrations"
   | "Educational tours"
-  | "Student achievements";
+  | "Student achievements"
+  | "Plantation drive";
 
 export type GalleryItem = {
   src: string;
@@ -36,6 +37,14 @@ export const galleryItems: GalleryItem[] = [
     caption: "The school building at Bhensola Chopati",
     category: "Campus",
     aspect: "16 / 10",
+    span: "wide",
+  },
+  {
+    src: `${A}/plantation-drive.jpg`,
+    alt: "Students in school uniform planting saplings together in front of the Sunrise Convent School building",
+    caption: "Students planting saplings at the school",
+    category: "Plantation drive",
+    aspect: "4 / 3",
     span: "wide",
   },
   {
@@ -174,6 +183,7 @@ export const galleryCategories: GalleryCategory[] = [
   "Sports & games",
   "Cultural celebrations",
   "Educational tours",
+  "Plantation drive",
   "Student achievements",
 ];
 

@@ -77,7 +77,7 @@ export default function ActivitiesPage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="frame-media aspect-[3/4]">
+            <div className="frame-media aspect-[4/5]">
               <Image
                 src="/images/activities/participation-activity.jpg"
                 alt="Smiling pupils raising their hands and joining in during a group activity at Sunrise Convent School"

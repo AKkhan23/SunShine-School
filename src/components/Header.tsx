@@ -111,7 +111,7 @@ export function Header() {
         {/* Row 1 — brand and primary action */}
         <div
           className={`container-page flex items-center justify-between gap-4 transition-all duration-300 ease-gentle ${
-            scrolled ? "h-16" : "h-[4.75rem]"
+            scrolled ? "h-14" : "h-[4.25rem]"
           }`}
         >
           <BrandLink />
@@ -142,32 +142,54 @@ export function Header() {
           </div>
         </div>
 
-        {/* Row 2 — full navigation, desktop only. Collapses away on scroll. */}
-        <div
-          className={`hidden overflow-hidden border-t border-navy-100/70 transition-all duration-300 ease-gentle lg:block ${
-            scrolled ? "max-h-0 opacity-0" : "max-h-16 opacity-100"
-          }`}
-        >
+        {/* Row 2 — full navigation. Always visible, desktop only. */}
+        <div className="hidden border-t border-navy-100/80 lg:block">
           <nav aria-label="Primary" className="container-page">
-            <ul className="flex h-12 items-center justify-center gap-1">
+            <ul
+              className={`scrollbar-none flex items-center justify-center gap-0.5 overflow-x-auto transition-all duration-300 ease-gentle ${
+                scrolled ? "h-11" : "h-12"
+              }`}
+            >
               {primaryNav.map((item) => {
                 const active = isActive(item.href);
                 return (
-                  <li key={item.href}>
+                  <li key={item.href} className="shrink-0">
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`relative flex h-full items-center rounded-full px-3 text-[0.82rem] font-semibold transition-colors duration-200 ${
-                        active ? "text-navy-900" : "text-ink/65 hover:text-navy-800"
+                      className={`group relative flex h-9 items-center rounded-full px-3.5 text-[0.82rem] font-semibold transition-colors duration-300 ease-gentle ${
+                        active
+                          ? "text-navy-900"
+                          : "text-ink/65 hover:text-navy-900"
                       }`}
                     >
-                      {item.label}
+                      {/* Soft pill that fades in underneath the label */}
                       <span
                         aria-hidden="true"
-                        className={`absolute inset-x-3 bottom-1 h-[2.5px] rounded-full bg-sun transition-transform duration-300 ease-gentle ${
-                          active ? "scale-x-100" : "scale-x-0"
+                        className={`absolute inset-0 rounded-full bg-sun/15 transition-opacity duration-300 ease-gentle ${
+                          active ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                         }`}
                       />
+
+                      {/* Underline that grows from the centre */}
+                      <span
+                        aria-hidden="true"
+                        className={`absolute inset-x-3.5 bottom-0.5 h-[2.5px] origin-center rounded-full bg-gradient-to-r from-sun-dark via-sun to-sun-light transition-transform duration-300 ease-gentle ${
+                          active
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+
+                      <span className="relative z-10 whitespace-nowrap">{item.label}</span>
+
+                      {/* Active marker */}
+                      {active && (
+                        <span
+                          aria-hidden="true"
+                          className="relative z-10 ml-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sun ring-4 ring-sun/30"
+                        />
+                      )}
                     </Link>
                   </li>
                 );
@@ -185,7 +207,7 @@ export function Header() {
         role="dialog"
         aria-modal="true"
         aria-label="Site navigation"
-        className="fixed inset-x-0 bottom-0 top-[4.75rem] z-40 overflow-y-auto overscroll-contain bg-navy-900/40 backdrop-blur-sm lg:hidden"
+        className="fixed inset-x-0 bottom-0 top-[4.25rem] z-40 overflow-y-auto overscroll-contain bg-navy-900/40 backdrop-blur-sm lg:hidden"
         onClick={(event) => {
           if (event.target === event.currentTarget) setOpen(false);
         }}

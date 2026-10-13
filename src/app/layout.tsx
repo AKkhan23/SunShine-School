@@ -26,10 +26,11 @@ const bodyFont = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
-  title: {
-    default: `${school.name}, Bhensola | ${school.classRange.from} to ${school.classRange.to}`,
-    template: `%s | ${school.name}`,
-  },
+  // Every page supplies its own complete, brand-inclusive title (see
+  // `buildMetadata` in src/lib/seo.ts), so this plain string is only a
+  // fallback. A `%s` template must be avoided here — it would append the
+  // school name a second time to titles that already contain it.
+  title: `${school.name}, Bhensola | ${school.classRange.from} to ${school.classRange.to}`,
   description: `Sunrise Convent School at Bhensola, Badnawar, Dhar, Madhya Pradesh. An English medium school for ${school.classRange.from} to ${school.classRange.to} — explore our learning approach, student achievements, school activities and admission enquiries.`,
   applicationName: school.name,
   authors: [{ name: school.name }],
