@@ -61,6 +61,33 @@ const valueCards = [
   },
 ] as const;
 
+const campusPhotos = [
+  {
+    src: imagePaths.assembly,
+    eyebrow: "Morning assembly",
+    caption: "Students in rows outside the school building",
+    alt: "Students in uniform standing in rows during morning assembly outside the Sunrise Convent School building at Bhensola",
+  },
+  {
+    src: imagePaths.classroom,
+    eyebrow: "Classroom",
+    caption: "A class of pupils working at their desks",
+    alt: "Pupils seated at their desks in a light, airy classroom at Sunrise Convent School, Bhensola",
+  },
+  {
+    src: imagePaths.computerClass,
+    eyebrow: "Computer class",
+    caption: "Hands-on learning at the computer stations",
+    alt: "Pupils working at computer stations in the computer class at Sunrise Convent School, Bhensola",
+  },
+  {
+    src: imagePaths.readingRoom,
+    eyebrow: "Reading room",
+    caption: "Shelves of books, and room to read",
+    alt: "Pupils reading at desks beside shelves stacked with books in the reading room at Sunrise Convent School, Bhensola",
+  },
+] as const;
+
 export default function HomePage() {
   return (
     <>
@@ -158,18 +185,18 @@ export default function HomePage() {
 
                 <div className="frame-media aspect-[16/10]">
                   <Image
-                    src={imagePaths.campus}
-                    alt="Architectural illustration of the Sunrise Convent School building at Bhensola Chopati, Madhya Pradesh"
+                    src={imagePaths.assembly}
+                    alt="Students in uniform standing in rows during morning assembly outside the Sunrise Convent School building at Bhensola"
                     fill
                     priority
                     sizes="(min-width: 1024px) 48vw, 100vw"
                   />
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"
+                    className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"
                   />
                   <p className="absolute inset-x-0 bottom-0 px-5 pb-4 text-[0.78rem] font-medium text-white/90">
-                    Sunrise Convent School · Kod Road, Bhensola Chopati
+                    Morning assembly · Sunrise Convent School, Bhensola
                   </p>
                 </div>
 
@@ -359,19 +386,18 @@ export default function HomePage() {
       <section className="section-y bg-white">
         <div className="container-page grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="order-2 lg:order-1 lg:col-span-7">
-            <div className="frame-media aspect-[16/10]">
+            <div className="frame-media aspect-[4/3]">
               <Image
-                src={imagePaths.campus}
-                alt="Illustration of the Sunrise Convent School campus building at Kod Road, Bhensola Chopati"
+                src={imagePaths.computerClass}
+                alt="Pupils working at computer stations in the computer class at Sunrise Convent School, Bhensola"
                 fill
                 sizes="(min-width: 1024px) 58vw, 100vw"
                 loading="lazy"
               />
             </div>
             <p className="mt-3 text-[0.8rem] leading-relaxed text-ink/50">
-              Architectural artwork supplied by the school. Please replace with a current
-              photograph of the campus before launch, so parents see exactly what they will
-              visit.
+              A computer class at the school. Photographs on this page were taken at
+              Sunrise Convent School, Bhensola.
             </p>
           </div>
 
@@ -476,6 +502,49 @@ export default function HomePage() {
                 events and timings with the office before visiting.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------- Real photographs */}
+      <section className="section-y bg-white">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Inside the School"
+            title="Photographs of the Real Campus"
+            lede="Not renderings or stock pictures. These are photographs taken inside Sunrise Convent School at Bhensola — the classrooms, the reading shelves and the computer room your child would actually use."
+            align="center"
+          />
+
+          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {campusPhotos.map((photo) => (
+              <li key={photo.src} className="card-interactive overflow-hidden">
+                <div className="frame-media aspect-[4/5] rounded-none border-0 shadow-none">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(min-width: 1024px) 24vw, (min-width: 640px) 48vw, 90vw"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="px-5 py-4">
+                  <span className="block text-2xs font-semibold uppercase tracking-[0.14em] text-school">
+                    {photo.eyebrow}
+                  </span>
+                  <span className="mt-1 block text-[0.92rem] font-semibold leading-snug text-navy-900">
+                    {photo.caption}
+                  </span>
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10 text-center">
+            <Link href="/gallery" className="btn-primary">
+              See the full gallery
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>

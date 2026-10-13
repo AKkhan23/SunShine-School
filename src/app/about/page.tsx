@@ -52,6 +52,27 @@ const pillars = [
   },
 ] as const;
 
+const campusPhotos = [
+  {
+    src: imagePaths.classroom,
+    eyebrow: "Classroom",
+    caption: "A class of pupils working at their desks",
+    alt: "Pupils seated at their desks in a light, airy classroom at Sunrise Convent School, Bhensola",
+  },
+  {
+    src: imagePaths.readingRoom,
+    eyebrow: "Reading room",
+    caption: "Shelves of books, and room to read",
+    alt: "Pupils reading at desks beside shelves stacked with books in the reading room at Sunrise Convent School, Bhensola",
+  },
+  {
+    src: imagePaths.computerClass,
+    eyebrow: "Computer class",
+    caption: "Hands-on learning at the computer stations",
+    alt: "Pupils working at computer stations in the computer class at Sunrise Convent School, Bhensola",
+  },
+] as const;
+
 export default function AboutPage() {
   return (
     <>
@@ -72,8 +93,8 @@ export default function AboutPage() {
         }
         lede="Sunrise Convent School is an English medium school on Kod Road at Bhensola Chopati, serving families across Bhensola, Badnawar and the wider Dhar district. We teach children from Nursery to Class 8."
         trail={trail}
-        media={imagePaths.campus}
-        mediaAlt="Architectural illustration of the Sunrise Convent School building at Bhensola"
+        media={imagePaths.assembly}
+        mediaAlt="Students in uniform standing in rows during morning assembly outside the Sunrise Convent School building at Bhensola"
       />
 
       {/* Welcome */}
@@ -164,6 +185,42 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Real photographs */}
+      <section className="section-y bg-cream">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Inside the School"
+            title="What a Day Here Actually Looks Like"
+            lede="Photographs taken at Sunrise Convent School, Bhensola. Nothing on this page is a rendering or a stock picture."
+            align="center"
+          />
+
+          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {campusPhotos.map((photo) => (
+              <li key={photo.src} className="card-interactive overflow-hidden">
+                <div className="frame-media aspect-[4/3] rounded-none border-0 shadow-none">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(min-width: 1024px) 32vw, (min-width: 640px) 48vw, 90vw"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="px-5 py-4">
+                  <span className="block text-2xs font-semibold uppercase tracking-[0.14em] text-school">
+                    {photo.eyebrow}
+                  </span>
+                  <span className="mt-1 block text-[0.92rem] font-semibold leading-snug text-navy-900">
+                    {photo.caption}
+                  </span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Motto */}
       <MottoBand
         body={school.mottoMeaning}
@@ -174,15 +231,19 @@ export default function AboutPage() {
       <section className="section-y bg-white">
         <div className="container-page grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="order-2 lg:order-1 lg:col-span-6">
-            <div className="frame-media aspect-[4/3]">
+            <div className="frame-media aspect-[3/4]">
               <Image
-                src="/images/activities/classroom-learning-rect.jpg"
-                alt="Young pupils learning together in a bright classroom at Sunrise Convent School"
+                src={imagePaths.classroom}
+                alt="Pupils seated at their desks in a light, airy classroom at Sunrise Convent School, Bhensola"
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 loading="lazy"
               />
             </div>
+            <p className="mt-3 text-[0.8rem] leading-relaxed text-ink/50">
+              A classroom at the school — bright, orderly, and built so that every child at
+              the back can see the board.
+            </p>
           </div>
 
           <div className="order-1 lg:order-2 lg:col-span-6">

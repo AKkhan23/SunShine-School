@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { InstagramIcon } from "@/components/BrandIcons";
 import { BrandLockup } from "@/components/Brand";
 import { SunRays } from "@/components/SunRays";
 import { footerNavGroups, legalNav } from "@/lib/navigation";
@@ -104,6 +105,15 @@ export function Footer() {
                 WhatsApp
               </a>
               <a
+                href={school.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-sm bg-white/10 text-white hover:bg-white/20"
+              >
+                <InstagramIcon className="h-4 w-4" />
+                Instagram
+              </a>
+              <a
                 href={directionsHref}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -113,12 +123,22 @@ export function Footer() {
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
+
+            <a
+              href={school.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline mt-4 inline-flex items-center gap-2 text-[0.83rem] font-medium text-white/70 transition-colors hover:text-sun"
+            >
+              <InstagramIcon className="h-3.5 w-3.5" />
+              {school.social.instagramHandle}
+            </a>
           </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-[0.8rem] text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {school.name}. All rights reserved.
+            © {year} {school.name}. All rights reserved.
           </p>
           <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {legalNav.map((item) => (
@@ -129,6 +149,26 @@ export function Footer() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* Development credit — centred at the foot of the page */}
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 text-center">
+          <span
+            aria-hidden="true"
+            className="h-px w-24 bg-gradient-to-r from-transparent via-sun/70 to-transparent"
+          />
+          <p className="text-[0.62rem] font-semibold uppercase tracking-[0.3em] text-white/45">
+            Designed &amp; Developed by
+          </p>
+          <p className="font-display text-xl font-bold uppercase tracking-[0.16em] text-sun sm:text-2xl">
+            <a href="https://www.aimfortech.com/" target="_blank" rel="noopener noreferrer" className="hover:text-sun">
+              Aimfortech Solution
+            </a>
+          </p>
+          <span
+            aria-hidden="true"
+            className="h-px w-24 bg-gradient-to-r from-transparent via-sun/70 to-transparent"
+          />
         </div>
 
         <p className="mt-4 text-[0.72rem] leading-relaxed text-white/35">

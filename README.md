@@ -30,6 +30,7 @@ Requires **Node.js 20 or newer**.
 | `npm run verify`          | Checks every route, link, asset, SEO tag and accessibility tag in `out/`      |
 | `npm run preview`         | Zero-dependency static server for the exported folder                        |
 | `npm run prepare:assets`  | Re-crops activity photographs out of the admission poster (see §6)            |
+| `npm run prepare:photos`  | Re-optimises the supplied campus photographs from `src/_originals/`           |
 | `npm run prepare:og`      | Regenerates the 1200×630 social-sharing image                                 |
 
 ### What `npm run build` produces
@@ -59,7 +60,7 @@ out/
 | `/results`           | Class 8 and Class 5 board results, original poster, achievement philosophy |
 | `/gallery`           | Filterable gallery with keyboard-accessible lightbox                |
 | `/activities`        | Sports, cultural celebrations, tours and creative work               |
-| `/contact`           | Contact details, click-to-call / email / WhatsApp, directions, enquiry form, official letterhead |
+| `/contact`           | Contact details, click-to-call / email / WhatsApp, directions, enquiry form, address and nearby landmarks |
 | `/privacy-policy`    | Plain-language privacy notice describing what the site actually does |
 | `404`                | Friendly not-found page with links to every section                 |
 
@@ -167,14 +168,24 @@ All images live in `public/images/` with descriptive filenames:
 ```
 public/images/
 ├── brand/        sunrise-convent-school-logo.jpeg
-│                 sunrise-convent-school-letterhead.jpeg
 │                 sunrise-convent-school-og.png
-├── campus/       sunrise-convent-school-campus-illustration.jpeg
+├── campus/       sunrise-convent-school-campus-illustration.jpeg  (architectural artwork)
+│                 sunrise-convent-school-assembly.jpg               ← home hero
+│                 sunrise-convent-school-classroom.jpg
+│                 sunrise-convent-school-computer-class.jpg
+│                 sunrise-convent-school-reading-room.jpg
 ├── promotions/   sunrise-convent-school-admission-poster.jpeg
 ├── achievements/ sunrise-convent-school-shining-stars-poster.jpeg
 └── activities/   18 photographs: 17 cropped from the admission poster,
                   plus plantation-drive.jpg (supplied directly)
 ```
+
+Keep the untouched originals in `src/_originals/`. `npm run prepare:photos`
+rebuilds the optimised web versions from them at any time.
+
+The school's letterhead image is **not** published on the website. Its address
+wording is still kept in `src/lib/site.ts` as `letterheadAddress` because the school
+office uses it in writing.
 
 ### Where the activity photographs come from
 
@@ -319,8 +330,8 @@ school office — see `PENDING_CONFIRMATION` in `src/lib/site.ts`.
 - [ ] **Written parental consent** before publishing any child's photograph, name or
       individual result. The results page reproduces the poster, but individual student
       photographs are withheld until consent is recorded.
-- [ ] **Verification of the newsroom / government registration number** printed on the
-      letterhead.
+- [ ] **Verification of the newsroom / government registration number** that appears on
+      the school's printed documents.
 - [ ] **The Vision & Mission statements** are website copy awaiting the school's
       formal approval — the page says so in a visible banner.
 

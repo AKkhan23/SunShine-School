@@ -52,6 +52,12 @@ export const school = {
 
   email: "ppatidar351@gmail.com",
 
+  /** Official school Instagram account, linked from the footer. */
+  social: {
+    instagram: "https://www.instagram.com/sunrise_convent_school_2016/",
+    instagramHandle: "@sunrise_convent_school_2016",
+  },
+
   /**
    * A text search query, not a pin. Exact map coordinates have not been
    * verified, so we deliberately never emit Geo coordinates in schema.org.
@@ -72,9 +78,13 @@ export const addressLine2 = `${school.address.tehsil}, District ${school.address
 
 export const imagePaths = {
   logo: "/images/brand/sunrise-convent-school-logo.jpeg",
-  letterhead: "/images/brand/sunrise-convent-school-letterhead.jpeg",
   /** NOTE: the supplied "building photograph" is an architectural rendering. */
   campus: "/images/campus/sunrise-convent-school-campus-illustration.jpeg",
+  /** Real photographs of the actual school, campus and classrooms. */
+  assembly: "/images/campus/sunrise-convent-school-assembly.jpg",
+  classroom: "/images/campus/sunrise-convent-school-classroom.jpg",
+  computerClass: "/images/campus/sunrise-convent-school-computer-class.jpg",
+  readingRoom: "/images/campus/sunrise-convent-school-reading-room.jpg",
   admissionPoster: "/images/promotions/sunrise-convent-school-admission-poster.jpeg",
   resultsPoster: "/images/achievements/sunrise-convent-school-shining-stars-poster.jpeg",
   ogImage: "/images/brand/sunrise-convent-school-og.png",

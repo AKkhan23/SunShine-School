@@ -11,6 +11,7 @@
     "verify": "node scripts/verify-export.cjs && node scripts/verify-classes.cjs",
     "preview": "node scripts/serve-export.cjs",
     "prepare:assets": "node scripts/prepare-assets.cjs",
+    "prepare:photos": "node scripts/prepare-photos.cjs",
     "prepare:og": "node scripts/prepare-og.cjs"
   },
   "dependencies": {

@@ -48,14 +48,6 @@ export const galleryItems: GalleryItem[] = [
     span: "wide",
   },
   {
-    src: "/images/brand/sunrise-convent-school-letterhead.jpeg",
-    alt: "Official letterhead of Sunrise Convent School showing the address on Kod-Bhensola Road and contact number 88717 63431",
-    caption: "Official letterhead and school address",
-    category: "Campus",
-    aspect: "3 / 4",
-    span: "tall",
-  },
-  {
     src: `${A}/writing-activity.png`,
     alt: "A pupil concentrating as she writes in her notebook during a class activity",
     caption: "Focused work in the classroom",
